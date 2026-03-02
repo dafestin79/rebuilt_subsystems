@@ -60,5 +60,9 @@ public final class Constants {
         // ramp rates
         public static final double kOpenLoopRampRate = 0.5; 
         public static final double kClosedLoopRampRate = 0.0;
+
+        // angles
+        public static final double kMinAngle = 0.0;
+        public static final double kMaxAngle = 90.0;
     }
 }
