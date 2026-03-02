@@ -6,7 +6,6 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.FeedbackSensor;
 import com.revrobotics.spark.SparkAbsoluteEncoder;
 import com.revrobotics.spark.config.SparkMaxConfig;
-import com.revrobotics.spark.config.ClosedLoopConfig.*;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkBase.PersistMode;
 
@@ -22,7 +21,10 @@ public class IntakeSubsystem extends SubsystemBase {
         GROUND(IntakeConstants.kAngleGround);
 
         public final double angleDegrees;
-        IntakeState(double angle) { this.angleDegrees = angle; }
+
+        IntakeState(double angle) { 
+            this.angleDegrees = angle; 
+        }
     }
 
     private final SparkMax roller;
@@ -83,17 +85,18 @@ public class IntakeSubsystem extends SubsystemBase {
         this.currentState = state;
     }
 
-    public void runRoller(double speed) { roller.set(speed); }
-    public void stopRoller() { roller.set(0); }
+    public void setRoller(double speed) { 
+        roller.set(speed); 
+    }
 
     @Override
     public void periodic() {
         double currentAngleRad = Units.degreesToRadians(pivotAbsEncoder.getPosition());
         double ffVoltage = feedforward.calculate(currentAngleRad, 0);
 
-        
+        double targetAngle = Math.min(Math.max(currentState.angleDegrees, IntakeConstants.kMinAngle), IntakeConstants.kMaxAngle);
         pivotController.setSetpoint(
-            currentState.angleDegrees, 
+            targetAngle, 
             SparkMax.ControlType.kPosition, 
             com.revrobotics.spark.ClosedLoopSlot.kSlot0, 
             ffVoltage
