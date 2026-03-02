@@ -55,7 +55,7 @@ public class IntakeSubsystem extends SubsystemBase {
             .smartCurrentLimit(IntakeConstants.kRollerCurrentLimit)
             .inverted(IntakeConstants.kRollerInverted);
         
-        roller.configure(rollerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        roller.configure(rollerConfig, com.revrobotics.ResetMode.kResetSafeParameters, com.revrobotics.PersistMode.kPersistParameters);
 
         // pivot config
         SparkMaxConfig pivotConfig = new SparkMaxConfig();
@@ -77,7 +77,7 @@ public class IntakeSubsystem extends SubsystemBase {
             .outputRange(-1.0, 1.0);
 
         
-        pivot.configure(pivotConfig, SparkMax.ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        pivot.configure(pivotConfig, com.revrobotics.ResetMode.kResetSafeParameters, com.revrobotics.PersistMode.kPersistParameters);
         
     }
 
