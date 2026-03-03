@@ -71,7 +71,7 @@ public final class Constants {
     
         public static final boolean kIndexerInverted = false;
     
-        public static final double kIndexerCurrentLimit = 25.0;
+        public static final int kIndexerCurrentLimit = 25;
     }
   
 }
